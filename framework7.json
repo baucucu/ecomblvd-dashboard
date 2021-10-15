@@ -1,0 +1,19 @@
+{
+  "cwd": "/Users/Alex/Documents/JSProjects/EcomBlvd/DashboardApp",
+  "type": [
+    "web"
+  ],
+  "name": "EcomBlvd",
+  "framework": "react",
+  "template": "single-view",
+  "bundler": "vite",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#728da9",
+    "darkTheme": true,
+    "iconFonts": true,
+    "fillBars": false
+  },
+  "customBuild": false
+}
