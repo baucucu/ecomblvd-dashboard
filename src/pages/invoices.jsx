@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page, Navbar, NavRight, Link , Block, BlockTitle } from 'framework7-react';
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 // import { useDemoData } from '@mui/x-data-grid-generator';
 
 const InvoicesPage = () => (
