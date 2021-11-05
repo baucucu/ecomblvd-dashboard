@@ -1,55 +1,57 @@
 import React, { useState, useEffect } from 'react';
+// test
 
 import {
   f7,
   f7ready,
   App,
   Panel,
-  Views,
   View,
+  Icon,
   Popup,
   Page,
   Navbar,
-  Toolbar,
   NavRight,
   Link,
   Block,
-  BlockTitle,
+  Button,
   LoginScreen,
   LoginScreenTitle,
   List,
   ListItem,
   ListInput,
   ListButton,
-  BlockFooter
+  BlockFooter,
+  useStore
 } from 'framework7-react';
-
 
 import routes from '../js/routes';
 import store from '../js/store';
 
 const MyApp = () => {
-  // Login screen demo data
-  const [username, setUsername] = useState('');
+  
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [loginError, setLoginError] = useState()
+  const [loginScreenOpened,setLoginScreenOpened] = useState(!store.getters.user.value)
+  
   // Framework7 Parameters
   const f7params = {
-    name: 'EcomBlvd', // App name
-      theme: 'auto', // Automatic theme detection
-
-
+    name: 'Invoices App', // App name
+      theme: 'aurora', // Automatic theme detection
 
       // App store
       store: store,
       // App routes
       routes: routes,
   };
-  const alertLoginData = () => {
-    f7.dialog.alert('Username: ' + username + '<br>Password: ' + password, () => {
-      f7.loginScreen.close();
-    });
-  }
+
+  useEffect(() => {
+    f7.on('loggedIn', () => {setLoginScreenOpened(false); setLoginError()}) 
+    f7.on('loggedOut', () => setLoginScreenOpened(true)) 
+    f7.on('loginError', (err) => {console.log("login error: ", err.error);setLoginError(err.error)})
+  })
+
   f7ready(() => {
 
 
@@ -100,17 +102,17 @@ const MyApp = () => {
         </View>
       </Popup>
 
-      <LoginScreen id="my-login-screen">
+      <LoginScreen id="my-login-screen" opened={loginScreenOpened}>
         <View>
           <Page loginScreen>
             <LoginScreenTitle>Login</LoginScreenTitle>
             <List form>
               <ListInput
                 type="text"
-                name="username"
-                placeholder="Your username"
-                value={username}
-                onInput={(e) => setUsername(e.target.value)}
+                name="email"
+                placeholder="Your email"
+                value={email}
+                onInput={(e) => setEmail(e.target.value)}
               ></ListInput>
               <ListInput
                 type="password"
@@ -121,9 +123,9 @@ const MyApp = () => {
               ></ListInput>
             </List>
             <List>
-              <ListButton title="Sign In" onClick={() => alertLoginData()} />
+              <ListButton title="Sign In" onClick={() => {store.dispatch('login',{email,password})}} />
               <BlockFooter>
-                Some text about login information.<br />Click "Sign In" to close Login Screen
+                {loginError && String(loginError)}
               </BlockFooter>
             </List>
           </Page>

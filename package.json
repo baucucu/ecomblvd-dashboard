@@ -20,10 +20,9 @@
     "Samsung >= 5"
   ],
   "dependencies": {
-    "@emotion/react": "^11.4.1",
+    "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
-    "@mui/material": "^5.0.4",
-    "@mui/x-data-grid-pro": "^4.0.1",
+    "@mui/material": "^5.0.6",
     "dom7": "^3.0.0",
     "framework7": "^6.3.5",
     "framework7-icons": "^5.0.5",
@@ -32,6 +31,8 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-transition-group": "^4.4.2",
+    "realm-web": "^1.4.0",
     "skeleton-elements": "^3.5.0",
     "swiper": "^6.8.4"
   },
